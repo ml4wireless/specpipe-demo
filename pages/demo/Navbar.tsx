@@ -114,7 +114,10 @@ export default function Navbar( { children, currentPage }: NavbarProps ) {
           )}
         </Disclosure>
         <main>
-          <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">{ children }</div>
+          <div className={classNames(
+              (currentPage === 'Dashboard') ? "mx-auto max-w-7xl sm:px-6 lg:px-8" : 
+              "mx-auto max-w-7xl py-6 sm:px-6 lg:px-8"
+          )}>{ children }</div>
         </main>
       </div>
     </>
