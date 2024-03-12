@@ -2,15 +2,9 @@ import Navbar from "../Navbar"
 import getBaseAPI from "../api"
 import React, { useState } from "react"
 import axios from "axios"
-import Box from "@mui/material/Box"
-import InputLabel from "@mui/material/InputLabel"
-import MenuItem from "@mui/material/MenuItem"
-import FormControl from "@mui/material/FormControl"
-import Select from "@mui/material/Select"
-import Container from "@mui/material/Container"
-import Typography from "@mui/material/Typography"
-import Slider from "@mui/material/Slider"
-import Button from "@mui/material/Button"
+import { Box, InputLabel, MenuItem, FormControl, Select, Container, Typography, Slider, Button } from "@mui/material"
+import BuildIcon from "@mui/icons-material/Build"
+import RestartAltIcon from "@mui/icons-material/RestartAlt"
 
 const baseAPI: string = getBaseAPI()
 
@@ -68,8 +62,12 @@ export default function Render() {
     }
   }
 
-  const handleButtonClick = () => {
+  const handleModifyClick = () => {
     updateFMDevice(deviceName, (freq * 1000000).toString(), sampleRate.toString() + "k", resampleRate.toString() + "k")
+  }
+
+  const handleResetClick = () => {
+    setCurrentDevice(deviceName)
   }
 
   async function updateFMDevice(device_name: string, freq: string, sample_rate?: string, resample_rate?: string) {
@@ -120,7 +118,7 @@ export default function Render() {
       <Container maxWidth="md">
         {/* Frequency */}
         <Typography id="freq-slider" variant="h5" gutterBottom>
-          Frequency (MHz)
+          Frequency: {freq} MHz
         </Typography>
         <Slider
           value={freq}
@@ -134,7 +132,7 @@ export default function Render() {
         />
         {/* Sample Rate */}
         <Typography id="sample-rate-slider" variant="h5" gutterBottom>
-          Sample Rate (kHz)
+          Sample Rate: {sampleRate} kHz
         </Typography>
         <Slider
           aria-label="Sample Rate"
@@ -149,7 +147,7 @@ export default function Render() {
         />
         {/* Resample Rate */}
         <Typography id="resample-rate-slider" variant="h5" gutterBottom>
-          Resample Rate (kHz)
+          Resample Rate: {resampleRate} kHz
         </Typography>
         <Slider
           aria-label="Resample Rate"
@@ -162,14 +160,24 @@ export default function Render() {
           max={50}
           onChange={(event, value) => setResampleRate(Number(value))}
         />
-        <Container className="flex flex-col items-center p-10">
+        <Container className="flex items-center justify-center p-10">
           <Button
             variant="contained"
             size="large"
-            className="mr-2 border-primary-900 bg-primary-900"
-            onClick={handleButtonClick}
+            className="mr-8 h-12 w-32 border-primary-900 bg-primary-900"
+            onClick={handleModifyClick}
+            startIcon={<BuildIcon />}
           >
             Modify
+          </Button>
+          <Button
+            variant="contained"
+            size="large"
+            className="mr-8 h-12 w-32 border-primary-900 bg-primary-900"
+            onClick={handleResetClick}
+            startIcon={<RestartAltIcon />}
+          >
+            Reset
           </Button>
         </Container>
       </Container>
