@@ -28,6 +28,7 @@ module.exports = {
       "8xl": "6rem",
       "9xl": "8rem",
       "10xl": "10rem",
+      "13xl": "15rem",
       "15xl": "20rem",
     },
     extend: {

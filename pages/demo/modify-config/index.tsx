@@ -10,6 +10,7 @@ import Select from "@mui/material/Select"
 import Container from "@mui/material/Container"
 import Typography from "@mui/material/Typography"
 import Slider from "@mui/material/Slider"
+import Button from "@mui/material/Button"
 
 const baseAPI: string = getBaseAPI()
 
@@ -37,16 +38,15 @@ export default function Render() {
     }
     try {
       const api = baseAPI + `/fm/devices/${deviceName}`
-      await axios.get(api).then((response) => {
-        const device = response.data.device
-        const freq = parseFloat(device.freq) / 1000000
-        const sampleRate = Number(device.sample_rate.slice(0, -1)) // remove "k" from the response
-        const resampleRate = Number(device.resample_rate.slice(0, -1)) // remove "k" from the response
-        setDeviceName(device.name)
-        setFreq(freq)
-        setSampleRate(sampleRate)
-        setResampleRate(resampleRate)
-      })
+      const response = await axios.get(api)
+      const device = response.data.device
+      const freq = parseFloat(device.freq) / 1000000
+      const sampleRate = Number(device.sample_rate.slice(0, -1)) // remove "k" from the response
+      const resampleRate = Number(device.resample_rate.slice(0, -1)) // remove "k" from the response
+      setDeviceName(device.name)
+      setFreq(freq)
+      setSampleRate(sampleRate)
+      setResampleRate(resampleRate)
     } catch (error) {
       console.error("Error fetching:", error)
       throw new Error(`Error fetching when getting FM devices: ${error}`)
@@ -66,6 +66,10 @@ export default function Render() {
       console.error("Error fetching:", error)
       throw new Error(`Error fetching when getting FM devices: ${error}`)
     }
+  }
+
+  const handleButtonClick = () => {
+    updateFMDevice(deviceName, (freq * 1000000).toString(), sampleRate.toString() + "k", resampleRate.toString() + "k")
   }
 
   async function updateFMDevice(device_name: string, freq: string, sample_rate?: string, resample_rate?: string) {
@@ -109,7 +113,7 @@ export default function Render() {
       </Container>
 
       <Container maxWidth="md">
-        <p className="item-center flex justify-center text-15xl">{freq}</p>
+        <p className="item-center flex justify-center text-13xl">{freq}</p>
         <p className="item-center flex justify-center text-6xl">MHz</p>
       </Container>
 
@@ -158,6 +162,16 @@ export default function Render() {
           max={50}
           onChange={(event, value) => setResampleRate(Number(value))}
         />
+        <Container className="flex flex-col items-center p-10">
+          <Button
+            variant="contained"
+            size="large"
+            className="mr-2 border-primary-900 bg-primary-900"
+            onClick={handleButtonClick}
+          >
+            Modify
+          </Button>
+        </Container>
       </Container>
     </>
   )
