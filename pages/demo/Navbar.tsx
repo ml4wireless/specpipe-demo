@@ -1,8 +1,9 @@
-import "styles/tailwind.css"
 import { Disclosure } from "@headlessui/react"
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline"
 import Image from "next/image"
 import Link from "next/link"
+import "styles/tailwind.css"
+
 import favicon from "../../favicon.ico"
 
 function classNames(...classes: string[]) {

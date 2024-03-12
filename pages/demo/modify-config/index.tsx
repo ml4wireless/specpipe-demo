@@ -1,12 +1,14 @@
-import Navbar from "../Navbar"
-import getBaseAPI from "../api"
-import React, { useState, useEffect } from "react"
+import { Container } from "@mui/material"
 import axios from "axios"
-import { Box, InputLabel, MenuItem, FormControl, Select, Container, Typography, Slider, Button } from "@mui/material"
-import BuildIcon from "@mui/icons-material/Build"
-import RestartAltIcon from "@mui/icons-material/RestartAlt"
+import React, { useEffect, useState } from "react"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+
+import ControlButtons from "../../../components/control-button"
+import FMDeviceSelector from "../../../components/fm-device-selector"
+import { FrequencySlider, ResampleRateSlider, SampleRateSlider } from "../../../components/slider"
+import getBaseAPI from "../api"
+import Navbar from "../navbar"
 
 const baseAPI: string = getBaseAPI()
 
@@ -85,98 +87,24 @@ export default function Render() {
       <Navbar currentPage="Modify Configuration">
         <></>
       </Navbar>
+      {/* Device Selector */}
       <Container maxWidth="sm">
         <ToastContainer limit={2} autoClose={3500} />
-        <Box sx={{ minWidth: 120 }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">FM Device</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={deviceName}
-              label="FM Device"
-              onChange={() => setCurrentDevice(deviceName)}
-            >
-              {fmDeviceNames.map((name) => (
-                <MenuItem key={name} value={name}>
-                  {name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
+        <FMDeviceSelector deviceName={deviceName} fmDeviceNames={fmDeviceNames} setCurrentDevice={setCurrentDevice} />
       </Container>
-
+      {/* Frequency Display */}
       <Container maxWidth="md">
         <p className="item-center flex justify-center text-13xl">{freq}</p>
         <p className="item-center flex justify-center text-6xl">MHz</p>
       </Container>
 
       <Container maxWidth="md">
-        {/* Frequency */}
-        <Typography id="freq-slider" variant="h5" gutterBottom>
-          Frequency: {freq} MHz
-        </Typography>
-        <Slider
-          value={freq}
-          valueLabelDisplay="auto"
-          shiftStep={0.1}
-          step={0.1}
-          marks
-          min={88}
-          max={108}
-          onChange={(event, value) => setFreq(Number(value))}
-        />
-        {/* Sample Rate */}
-        <Typography id="sample-rate-slider" variant="h5" gutterBottom>
-          Sample Rate: {sampleRate} kHz
-        </Typography>
-        <Slider
-          aria-label="Sample Rate"
-          value={sampleRate}
-          valueLabelDisplay="auto"
-          shiftStep={0.1}
-          step={0.1}
-          marks
-          min={10}
-          max={500}
-          onChange={(event, value) => setSampleRate(Number(value))}
-        />
-        {/* Resample Rate */}
-        <Typography id="resample-rate-slider" variant="h5" gutterBottom>
-          Resample Rate: {resampleRate} kHz
-        </Typography>
-        <Slider
-          aria-label="Resample Rate"
-          value={resampleRate}
-          valueLabelDisplay="auto"
-          shiftStep={0.1}
-          step={0.1}
-          marks
-          min={10}
-          max={50}
-          onChange={(event, value) => setResampleRate(Number(value))}
-        />
-        <Container className="flex items-center justify-center p-10">
-          <Button
-            variant="contained"
-            size="large"
-            className="mr-8 h-12 w-32 border-primary-900 bg-primary-900"
-            onClick={handleModifyClick}
-            startIcon={<BuildIcon />}
-          >
-            Modify
-          </Button>
-          <Button
-            variant="contained"
-            size="large"
-            className="mr-8 h-12 w-32 border-primary-900 bg-primary-900"
-            onClick={handleResetClick}
-            startIcon={<RestartAltIcon />}
-          >
-            Reset
-          </Button>
-        </Container>
+        {/* Sliders */}
+        <FrequencySlider freq={freq} setFreq={setFreq} />
+        <SampleRateSlider sampleRate={sampleRate} setSampleRate={setSampleRate} />
+        <ResampleRateSlider resampleRate={resampleRate} setResampleRate={setResampleRate} />
+        {/* Control Buttons */}
+        <ControlButtons handleModifyClick={handleModifyClick} handleResetClick={handleResetClick} />
       </Container>
     </>
   )

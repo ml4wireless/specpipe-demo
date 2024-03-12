@@ -1,8 +1,9 @@
+import { LP_GRID_ITEMS } from "lp-items"
 import { Metadata } from "next"
 import Link from "next/link"
-import { Button } from "components/Button/Button"
-import { LP_GRID_ITEMS } from "lp-items"
 import "styles/tailwind.css"
+
+import { Button } from "components/Button/Button"
 
 export const metadata: Metadata = {
   title: "SpecPipe | An AI Data Pipeline for Spectrum Data",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   // TODO: add og after deployment and fix favicon
-  icons: "/favicon.ico",
+  icons: "../favicon.ico",
 }
 
 export default function Web() {
