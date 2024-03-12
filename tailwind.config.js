@@ -15,6 +15,21 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontSize: {
+      base: "1rem",
+      lg: "1.125rem",
+      xl: "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem",
+      "5xl": "3rem",
+      "6xl": "4rem",
+      "7xl": "5rem",
+      "8xl": "6rem",
+      "9xl": "8rem",
+      "10xl": "10rem",
+      "15xl": "20rem",
+    },
     extend: {
       colors: {
         primary: {
@@ -28,7 +43,7 @@ module.exports = {
           700: "#587E97",
           800: "#426C85",
           900: "#2C5A74",
-          1000: "#164863"
+          1000: "#164863",
         },
       },
       fontFamily: {

@@ -26,18 +26,18 @@ export default function Web() {
               SpecPipe is a data pipeline for processing and analyzing spectrum data. It is designed to be easy to use
               and to provide a wide range of features for processing and analyzing spectrum data.
             </p>
-            <Button href="https://github.com/ml4wireless/specpipe" className="mr-3 bg-primary-900 border-primary-900">
+            <Button href="https://github.com/ml4wireless/specpipe" className="mr-3 border-primary-900 bg-primary-900">
               Get started
             </Button>
-            <Link legacyBehavior href='/demo/dashboard'>
+            <Link legacyBehavior href="/demo/dashboard">
               <Button href="/demo/dashboard" intent="secondary" className="border-primary-900 text-primary-900">
-                  See Demo
+                See Demo
               </Button>
             </Link>
           </div>
         </div>
       </section>
-      <section className="bg-white dark:bg-grary-900">
+      <section className="dark:bg-grary-900 bg-white">
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:py-16 lg:px-6">
           <div className="justify-center space-y-8 md:grid md:grid-cols-2 md:gap-12 md:space-y-0 lg:grid-cols-3">
             {LP_GRID_ITEMS.map((singleItem) => (
