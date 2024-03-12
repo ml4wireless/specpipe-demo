@@ -1,30 +1,24 @@
 import Navbar from "../Navbar"
 import getBaseAPI from "../api"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import axios from "axios"
 import { Box, InputLabel, MenuItem, FormControl, Select, Container, Typography, Slider, Button } from "@mui/material"
 import BuildIcon from "@mui/icons-material/Build"
 import RestartAltIcon from "@mui/icons-material/RestartAlt"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 const baseAPI: string = getBaseAPI()
 
-interface FMDevice {
-  name: string
-  register_ts: number
-  freq: string
-  sample_rate: string
-  specpipe_version: string
-  longitude: number
-  latitude: number
-  resample_rate: string
-}
-
 export default function Render() {
-  const [fmDevices, setFMDevices] = useState<FMDevice[]>([])
+  const [fmDeviceNames, setFMDeviceNames] = useState([])
   const [deviceName, setDeviceName] = useState("")
   const [freq, setFreq] = useState(0) // in MHz
   const [sampleRate, setSampleRate] = useState(0) // in kHz
   const [resampleRate, setResampleRate] = useState(0) // in kHz
+  useEffect(() => {
+    getFMDevices()
+  }, [])
 
   async function setCurrentDevice(deviceName: string) {
     if (deviceName === null || deviceName === undefined) {
@@ -50,12 +44,12 @@ export default function Render() {
   async function getFMDevices() {
     try {
       const api = getBaseAPI() + `/fm/devices`
-      await axios.get(api).then((response) => {
-        setFMDevices(response.data.devices)
-        if (deviceName === "") {
-          setCurrentDevice(response.data.devices[0].name)
-        }
-      })
+      const response = await axios.get(api)
+      const deviceNames = response.data.devices.map((device: { name: string }) => device.name)
+      setFMDeviceNames(deviceNames)
+      if (deviceName === "") {
+        setCurrentDevice(deviceNames[0])
+      }
     } catch (error) {
       console.error("Error fetching:", error)
       throw new Error(`Error fetching when getting FM devices: ${error}`)
@@ -75,21 +69,24 @@ export default function Render() {
       throw new Error("At least one parameter is required")
     }
     const api = getBaseAPI() + `/fm/devices/${device_name}`
-
     try {
-      await axios.put(api, { freq: freq, sample_rate: sample_rate, resample_rate: resample_rate })
+      const response = await axios.put(api, { freq: freq, sample_rate: sample_rate, resample_rate: resample_rate })
+      if (response.status === 200) {
+        toast.success("FM Device updated successfully")
+      } else {
+        toast.error("Error updating FM Device")
+      }
     } catch (error) {
-      console.error("Error during fetch operation:", error)
-      throw new Error(`Error updating IQ devices: ${error}`)
+      toast.error("Error updating FM Device")
     }
   }
-  getFMDevices()
   return (
     <>
       <Navbar currentPage="Modify Configuration">
         <></>
       </Navbar>
       <Container maxWidth="sm">
+        <ToastContainer limit={2} autoClose={3500} />
         <Box sx={{ minWidth: 120 }}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">FM Device</InputLabel>
@@ -100,9 +97,9 @@ export default function Render() {
               label="FM Device"
               onChange={() => setCurrentDevice(deviceName)}
             >
-              {fmDevices.map((fmDevice: { name: string; freq: string; sample_rate: string; resample_rate: string }) => (
-                <MenuItem key={fmDevice.name} value={fmDevice.name}>
-                  {fmDevice.name}
+              {fmDeviceNames.map((name) => (
+                <MenuItem key={name} value={name}>
+                  {name}
                 </MenuItem>
               ))}
             </Select>
