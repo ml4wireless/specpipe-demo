@@ -1,4 +1,4 @@
-import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material"
+import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material"
 
 export default function ({
   deviceName,
@@ -9,6 +9,10 @@ export default function ({
   fmDeviceNames: string[]
   setCurrentDevice: (deviceName: string) => void
 }) {
+   const handleDeviceChange = (event: SelectChangeEvent) => {
+    setCurrentDevice(event.target.value as string);
+  };
+
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
@@ -18,7 +22,7 @@ export default function ({
           id="demo-simple-select"
           value={deviceName}
           label="FM Device"
-          onChange={() => setCurrentDevice(deviceName)}
+          onChange={handleDeviceChange}
         >
           {fmDeviceNames.map((name) => (
             <MenuItem key={name} value={name}>
