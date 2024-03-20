@@ -1,11 +1,11 @@
-import Navbar from "../Navbar"
+import Navbar from "../navbar"
 
-export default function Render () {
+export default function Render() {
   return (
     <>
-    <Navbar currentPage="IQ Engine">
-      <h1> IQ Engine Demo </h1>
-    </Navbar>
+      <Navbar currentPage="IQ Engine">
+        <h1> IQ Engine Demo </h1>
+      </Navbar>
     </>
   )
 }
