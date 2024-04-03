@@ -4,9 +4,11 @@ import React, { useEffect, useState } from "react"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
-import ControlButtons from "../../../components/control-button"
-import FMDeviceSelector from "../../../components/fm-device-selector"
-import { FrequencySlider, ResampleRateSlider, SampleRateSlider } from "../../../components/slider"
+import AudioControl from "components/audio-control"
+import ControlButtons from "components/control-button"
+import FMDeviceSelector from "components/fm-device-selector"
+import { FrequencySlider, ResampleRateSlider, SampleRateSlider } from "components/slider"
+
 import getBaseAPI from "../api"
 import Navbar from "../navbar"
 
@@ -91,6 +93,7 @@ export default function Render() {
       <Container maxWidth="sm">
         <ToastContainer limit={2} autoClose={3500} />
         <FMDeviceSelector deviceName={deviceName} fmDeviceNames={fmDeviceNames} setCurrentDevice={setCurrentDevice} />
+        <AudioControl deviceName={deviceName} />
       </Container>
       {/* Frequency Display */}
       <Container maxWidth="md">
