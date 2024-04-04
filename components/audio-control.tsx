@@ -33,8 +33,8 @@ export async function ToggleAudio(
     deliver_policy: DeliverPolicy.New,
   }
 
-  const topic = `specpipe.data.fm.${deviceName}`
-  const pullSub = await js.pullSubscribe("specpipe.data.fm.dev0-mock", consumerOpts(opts))
+  const subject = `specpipe.data.fm.${deviceName}`
+  const pullSub = await js.pullSubscribe(subject, consumerOpts(opts))
   const pullBatch = 10
 
   try {

@@ -37,19 +37,31 @@ export default function Render() {
     }
     try {
       const api = baseAPI + `/fm/devices/${deviceName}`
-      const response = await axios.get(api)
-      const device = response.data.device
-      const freq = parseFloat(device.freq) / 1000000
-      const sampleRate = Number(device.sample_rate.slice(0, -1)) // remove "k" from the response
-      const resampleRate = Number(device.resample_rate.slice(0, -1)) // remove "k" from the response
-      setDeviceName(device.name)
-      setFreq(freq)
-      setSampleRate(sampleRate)
-      setResampleRate(resampleRate)
-      setIsPlaying(false) // stop audio when changing device
+      const response = await axios.get(api, {
+        validateStatus: (status) => {
+          return status === 200 || status === 404
+        },
+      })
+      if (response.status === 200) {
+        const device = response.data.device
+        const freq = parseFloat(device.freq) / 1000000
+        const sampleRate = Number(device.sample_rate.slice(0, -1)) // remove "k" from the response
+        const resampleRate = Number(device.resample_rate.slice(0, -1)) // remove "k" from the response
+        setDeviceName(device.name)
+        setFreq(freq)
+        setSampleRate(sampleRate)
+        setResampleRate(resampleRate)
+        setIsPlaying(false) // stop audio when changing device
+      } else {
+        setDeviceName(deviceName)
+        setFreq(0)
+        setSampleRate(0)
+        setResampleRate(0)
+        setIsPlaying(false) // stop audio when changing device
+      }
     } catch (error) {
       console.error("Error fetching:", error)
-      throw new Error(`Error fetching when getting FM devices: ${error}`)
+      throw new Error(`Error fetching when getting FM device: ${error}`)
     }
   }
 
@@ -57,7 +69,9 @@ export default function Render() {
     try {
       const api = getBaseAPI() + `/fm/devices`
       const response = await axios.get(api)
-      const deviceNames = response.data.devices.map((device: { name: string }) => device.name)
+      let deviceNames = response.data.devices.map((device: { name: string }) => device.name)
+      deviceNames.sort()
+      deviceNames.unshift("dev0-mock") // add mock device to default
       setFMDeviceNames(deviceNames)
       if (deviceName === "") {
         setCurrentDevice(deviceNames[0])
@@ -113,7 +127,7 @@ export default function Render() {
               setCurrentDevice={setCurrentDevice}
             />
           </Grid>
-          <Grid item xs={2}>
+          <Grid container item xs={1} alignItems="center" justifyContent="center">
             <AudioControl isPlaying={isPlaying} handleAudioClick={handleAudioClick} />
           </Grid>
         </Grid>
