@@ -9,9 +9,9 @@ export default function ({
   fmDeviceNames: string[]
   setCurrentDevice: (deviceName: string) => void
 }) {
-   const handleDeviceChange = (event: SelectChangeEvent) => {
-    setCurrentDevice(event.target.value as string);
-  };
+  const handleDeviceChange = (event: SelectChangeEvent) => {
+    setCurrentDevice(event.target.value as string)
+  }
 
   return (
     <Box sx={{ minWidth: 120 }}>
