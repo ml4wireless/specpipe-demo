@@ -39,8 +39,8 @@ export function SampleRateSlider({
         shiftStep={0.1}
         step={0.1}
         marks
-        min={10}
-        max={500}
+        min={100}
+        max={400}
         onChange={(event, value) => setSampleRate(Number(value))}
       />
     </>
@@ -67,7 +67,7 @@ export function ResampleRateSlider({
         step={0.1}
         marks
         min={10}
-        max={50}
+        max={40}
         onChange={(event, value) => setResampleRate(Number(value))}
       />
     </>
