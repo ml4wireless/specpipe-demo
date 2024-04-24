@@ -10,7 +10,7 @@ import FMDeviceSelector from "components/fm-device-selector"
 import { FrequencySlider, ResampleRateSlider, SampleRateSlider } from "components/slider"
 
 import getBaseAPI from "../api"
-import Navbar from "../navbar"
+import Navbar from "../Navbar"
 
 const baseAPI: string = getBaseAPI()
 

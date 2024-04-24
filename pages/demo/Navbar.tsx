@@ -66,28 +66,7 @@ export default function Navbar({ children, currentPage }: NavbarProps) {
                       </div>
                     </div>
                   </div>
-                  <div className="hidden md:block">
-                    <div className="ml-4 flex items-center md:ml-6">
-                      <button
-                        type="button"
-                        className="rounded-full bg-primary-1000 p-1 text-primary-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                      >
-                        <span className="sr-only">View notifications</span>
-                        <BellIcon className="size-6" aria-hidden="true" />
-                      </button>
-                    </div>
-                  </div>
-                  <div className="-mr-2 flex md:hidden">
-                    {/* Mobile menu button */}
-                    <Disclosure.Button className="inline-flex items-center justify-center rounded-md bg-primary-1000 p-2 text-primary-300 hover:bg-primary-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="sr-only">Open main menu</span>
-                      {open ? (
-                        <XMarkIcon className="block size-6" aria-hidden="true" />
-                      ) : (
-                        <Bars3Icon className="block size-6" aria-hidden="true" />
-                      )}
-                    </Disclosure.Button>
-                  </div>
+
                 </div>
               </div>
 
