@@ -6,10 +6,7 @@ export default function Render() {
       <Navbar currentPage="IQ Engine">
         <></>
       </Navbar>
-      <iframe
-        src="https://iqengine.org/browser"
-        style={{ height: "1000px", width: "100%" }}
-      ></iframe>
+      <iframe src="https://iqengine.org/browser" style={{ height: "1000px", width: "100%" }}></iframe>
     </>
   )
 }

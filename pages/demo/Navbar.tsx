@@ -66,7 +66,6 @@ export default function Navbar({ children, currentPage }: NavbarProps) {
                       </div>
                     </div>
                   </div>
-
                 </div>
               </div>
 
@@ -96,7 +95,7 @@ export default function Navbar({ children, currentPage }: NavbarProps) {
         <main>
           <div
             className={classNames(
-              (currentPage === "Dashboard" || currentPage === "IQ Engine")
+              currentPage === "Dashboard" || currentPage === "IQ Engine"
                 ? "mx-auto max-w-7xl sm:px-6 lg:px-8"
                 : "mx-auto max-w-7xl py-6 sm:px-6 lg:px-8"
             )}

@@ -9,8 +9,8 @@ import ControlButtons from "components/control-button"
 import FMDeviceSelector from "components/fm-device-selector"
 import { FrequencySlider, ResampleRateSlider, SampleRateSlider } from "components/slider"
 
-import getBaseAPI from "../api"
 import Navbar from "../Navbar"
+import getBaseAPI from "../api"
 
 const baseAPI: string = getBaseAPI()
 
