@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "cross-env FORCE_COLOR=1 next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 8080",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "prettier": "prettier --check \"**/*.{js,jsx,ts,tsx}\"",
