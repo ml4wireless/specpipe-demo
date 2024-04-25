@@ -15,7 +15,7 @@ export async function ToggleAudio(
   audioContextRef: React.MutableRefObject<AudioContext | null>
 ) {
   const nc = await connect({
-    servers: ["ws://ec2-13-56-236-180.us-west-1.compute.amazonaws.com:5222"],
+    servers: ["ws://ec2-54-215-201-36.us-west-1.compute.amazonaws.com:5222"],
     token: "mytoken",
   })
 

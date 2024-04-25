@@ -113,7 +113,7 @@ export default function Render() {
   }
   return (
     <>
-      <Navbar currentPage="Modify Configuration">
+      <Navbar currentPage="Controller">
         <></>
       </Navbar>
       {/* Device Selector */}

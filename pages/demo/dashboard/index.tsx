@@ -7,7 +7,7 @@ export default function Render() {
         <></>
       </Navbar>
       <iframe
-        src="http://ec2-13-56-236-180.us-west-1.compute.amazonaws.com:3000/d/yQUo5l17k/specpipe-dashboard"
+        src="http://ec2-13-56-236-180.us-west-1.compute.amazonaws.com:3000/d/specpipe-prod/specpipe"
         style={{ height: "950px", width: "100%" }}
       ></iframe>
     </>
