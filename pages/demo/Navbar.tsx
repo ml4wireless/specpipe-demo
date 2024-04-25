@@ -19,7 +19,7 @@ export default function Navbar({ children, currentPage }: NavbarProps) {
   const navigation = [
     { name: "Dashboard", href: "/demo/dashboard", current: currentPage === "Dashboard" },
     { name: "Speech to Text", href: "/demo/speech-to-text", current: currentPage === "Speech To Text" },
-    { name: "Modify Configuration", href: "/demo/modify-config", current: currentPage === "Modify Configuration" },
+    { name: "Controller", href: "/demo/controller", current: currentPage === "Controller" },
     { name: "IQ Engine", href: "/demo/iq-engine", current: currentPage === "IQ Engine" },
   ]
 
