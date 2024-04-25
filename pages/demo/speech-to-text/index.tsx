@@ -38,7 +38,8 @@ const Render: React.FC = () => {
 
   useEffect(() => {
     // Initialize WebSocket connection
-    const ws = new WebSocket("ws://0.0.0.0:8000/ws_fm_speech")
+    const sampleRateHz = Math.round(sampleRate * 1000)
+    const ws = new WebSocket(`ws://0.0.0.0:8000/ws/fm_speech/${deviceName}/${sampleRateHz}`)
 
     // Event listener for receiving messages
     ws.onmessage = (event) => {
